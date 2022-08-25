@@ -66,6 +66,12 @@ function opencase(casetype)
     )
 end
 
+function changePlayerSpeed(num)
+    local Client = game.Players.LocalPlayer
+ 	local Character = Client.Character or Client.CharacterAdded:Wait()
+ 	local Humanoid = Character.Humanoid
+    Humanoid.WalkSpeed = num    
+end
 
 
 
@@ -104,6 +110,24 @@ local uiTab = Window:MakeTab({
 	Name = "UI Unlocks",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
+})
+
+local MovementTab = Window:MakeTab({
+	Name = "Movement Hacks",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+MovementTab:AddSlider({
+	Name = "Speed Increase",
+	Min = 16,
+	Max = 100,
+	Default = 16,
+	Increment = 10,
+	ValueName = "walk speed",
+	Callback = function(Value)
+		changePlayerSpeed(Value)
+	end    
 })
 
 CasesTab:AddButton({
@@ -148,7 +172,7 @@ CasesTab:AddButton({
 uiTab:AddButton({
 	Name = "Open 1B Area",
 	Callback = function(Value)
-        workspace.Doors:Destroy();
+        workspace.GamePassDoor:Destroy();
 	end
 })
 
