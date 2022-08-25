@@ -74,6 +74,14 @@ function changePlayerSpeed(num)
 end
 
 
+function changePlayerJumpPower(num)
+    local Client = game.Players.LocalPlayer
+ 	local Character = Client.Character or Client.CharacterAdded:Wait()
+ 	local Humanoid = Character.Humanoid
+    Humanoid.JumpPower = num    
+end
+
+
 
 
 
@@ -127,6 +135,18 @@ MovementTab:AddSlider({
 	ValueName = "walk speed",
 	Callback = function(Value)
 		changePlayerSpeed(Value)
+	end    
+})
+
+MovementTab:AddSlider({
+	Name = "Jumb Power",
+	Min = 30,
+	Max = 100,
+	Default = 30,
+	Increment = 10,
+	ValueName = "jumb power",
+	Callback = function(Value)
+		changePlayerJumpPower(Value)
 	end    
 })
 
