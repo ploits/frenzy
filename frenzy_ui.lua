@@ -172,7 +172,7 @@ CasesTab:AddButton({
 uiTab:AddButton({
 	Name = "Open 1B Area",
 	Callback = function(Value)
-        workspace.GamePassDoor:Destroy();
+        workspace.Doors:Destroy();
 	end
 })
 
