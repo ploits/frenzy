@@ -21,6 +21,7 @@ local breakCaseOpening = false;
 local continousSelling = false;
 local targetPlayer = "";
 local stopAnnoy = false;
+local stopTeleportFun = false;
 
 function addcomma(num)
     local newstr = ""
@@ -181,6 +182,65 @@ teleportTab:AddButton({
 	end
 })
 
+function teleportToPillarTop()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(-21.8308773, 111.808342, -91.2692032, 0.00790419336, -2.60008886e-08, -0.999968767, -4.91700831e-08, 1, -2.63903637e-08, 0.999968767, 4.93771424e-08, 0.00790419336)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
+function teleportToRoofTop()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(76.962944, 122.746635, -99.2149734, 0.0610461272, -4.72949235e-09, 0.998134971, 7.6494e-10, 1, 4.69154582e-09, -0.998134971, 4.77112683e-10, 0.0610461272)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
+function teleportToSideWallTop()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(-9.89273167, 130.223404, 7.33558416, 0.998966396, 1.33034623e-08, -0.0454544351, -1.44995065e-08, 1, -2.59833399e-08, 0.0454544351, 2.66155507e-08, 0.998966396)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
+teleportTab:AddButton({
+	Name = "Teleport to Pillar top",
+	Callback = function(Value)
+	    teleportToPillarTop()
+	end
+})
+teleportTab:AddButton({
+	Name = "Teleport to Roof top",
+	Callback = function(Value)
+	    teleportToRoofTop()
+	end
+})
+teleportTab:AddButton({
+	Name = "Teleport to Side Wall top",
+	Callback = function(Value)
+	    teleportToSideWallTop()
+	end
+})
+teleportTab:AddButton({
+	Name = "Teleport Fun",
+	Callback = function(Value)
+	    stopTeleportFun = false
+	    repeat 
+    	    teleportToRoofTop()
+    	    wait(0.6)
+    	    teleportToSideWallTop()
+    	    wait(0.6)
+    	    teleportToPillarTop()
+    	    wait(0.6)
+    	until(stopTeleportFun)
+	end
+})
+teleportTab:AddButton({
+	Name = "Stop Teleport Fun",
+	Callback = function(Value)
+	    stopTeleportFun = true
+	end
+})
 
 MovementTab:AddSlider({
 	Name = "Speed Increase",
