@@ -19,7 +19,8 @@ local startval = stat.Value
 local endval = 0
 local breakCaseOpening = false;
 local continousSelling = false;
-
+local targetPlayer = "";
+local stopAnnoy = false;
 
 function addcomma(num)
     local newstr = ""
@@ -135,23 +136,51 @@ local teleportTab = Window:MakeTab({
 function getPlayerNames() 
     local Players = game:GetService("Players")
     local playerInGame = {};
---    local playerInGameStr = "{"
     for _, player in pairs(Players:GetPlayers()) do
---        playerInGameStr = playerInGameStr .. player.Name .. ","
     	table.insert(playerInGame,player.Name)
     end   
---    playerInGameStr = playerInGameStr .. "}"
---    print (playerInGameStr)
     return playerInGame
 end
+
+function teleportToPlayer(name)
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(6.53019094, 83.5324783, -118.816605, -0.16761826, -2.7051843e-09, 0.985852003, -1.25734907e-08, 1, 6.06214634e-10, -0.985852003, -1.2293988e-08, -0.16761826)
+    for _, player in pairs(game.Players:GetPlayers()) do
+    	if(player.Name == targetPlayer) then
+    	    repeat
+    	        targetPosition = player.Character:WaitForChild("HumanoidRootPart").CFrame
+    	        Character:SetPrimaryPartCFrame(targetPosition)
+    	        wait(0.0001)
+    	    until (stopAnnoy)  
+    	end
+    end    
+end
+
 
 teleportTab:AddDropdown({
 	Name = "Players",
 	Default = "1",
 	Options = getPlayerNames(),
 	Callback = function(Value)	
+	    targetPlayer = Value
 	end    
 })	
+
+teleportTab:AddButton({
+	Name = "Annoy Player",
+	Callback = function(Value)
+	    stopAnnoy=false
+	    teleportToPlayer(targetPlayer)
+	end
+})
+teleportTab:AddButton({
+	Name = "Stop Annoying Player",
+	Callback = function(Value)
+	    stopAnnoy = true
+	end
+})
+
 
 MovementTab:AddSlider({
 	Name = "Speed Increase",
