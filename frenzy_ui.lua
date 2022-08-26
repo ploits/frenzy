@@ -121,10 +121,37 @@ local uiTab = Window:MakeTab({
 })
 
 local MovementTab = Window:MakeTab({
-	Name = "Movement Hacks",
+	Name = "Movements",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+	
+local teleportTab = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+function getPlayerNames() 
+    local Players = game:GetService("Players")
+    local playerInGame = {};
+--    local playerInGameStr = "{"
+    for _, player in pairs(Players:GetPlayers()) do
+--        playerInGameStr = playerInGameStr .. player.Name .. ","
+    	table.insert(playerInGame,player.Name)
+    end   
+--    playerInGameStr = playerInGameStr .. "}"
+--    print (playerInGameStr)
+    return playerInGame
+end
+
+teleportTab:AddDropdown({
+	Name = "Players",
+	Default = "1",
+	Options = getPlayerNames(),
+	Callback = function(Value)	
+	end    
+})	
 
 MovementTab:AddSlider({
 	Name = "Speed Increase",
