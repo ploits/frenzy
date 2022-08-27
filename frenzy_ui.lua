@@ -143,6 +143,32 @@ function getPlayerNames()
     return playerInGame
 end
 
+function openCases (type) 
+    while wait(0.001) do
+    	        if breakCaseOpening then 
+    	            breakCaseOpening = false
+    	            break 
+    	        end 
+	            spawn(function()
+    	                local a, b, c, d = opencaseremote:InvokeServer(
+                        _G.othershit,
+                        _G.passcode,
+                        type,
+                        true
+                    )
+                    
+	            end)
+				if continousSelling then
+					sellremote:FireServer(
+						_G.othershit,
+						_G.passcode,
+						"All"
+					)
+				end
+    	    end    
+end
+
+
 function teleportToPlayer(name)
     local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
     local HumRoot = Character:WaitForChild("HumanoidRootPart")
@@ -269,39 +295,116 @@ MovementTab:AddSlider({
 CasesTab:AddButton({
 	Name = "Open Common Cases",
 	Callback = function(Value)
-	    while true 
-	        do
-	            opencase("Common")
-	    end
+	    while wait(0.001) do
+    	        if breakCaseOpening then 
+    	            print("exiting loop")
+    	            breakCaseOpening = false
+    	            break 
+    	        end 
+	            spawn(function()
+    	                local a, b, c, d = opencaseremote:InvokeServer(
+                        _G.othershit,
+                        _G.passcode,
+                        "Common",
+                        true
+                    )
+                    
+	            end)
+				if continousSelling then
+					sellremote:FireServer(
+						_G.othershit,
+						_G.passcode,
+						"All"
+					)
+				end
+    	    end
 	end
 })
 
 CasesTab:AddButton({
 	Name = "Open Uncommon Cases",
 	Callback = function(Value)
-	    while true 
-	        do
-	            opencase("Uncommon")
-	    end
+	    while wait(0.001) do
+    	        if breakCaseOpening then 
+    	            print("exiting loop")
+    	            breakCaseOpening = false
+    	            break 
+    	        end 
+	            spawn(function()
+    	                local a, b, c, d = opencaseremote:InvokeServer(
+                        _G.othershit,
+                        _G.passcode,
+                        "Uncommon",
+                        true
+                    )
+                    
+	            end)
+				if continousSelling then
+					sellremote:FireServer(
+						_G.othershit,
+						_G.passcode,
+						"All"
+					)
+				end
+    	    end
 	end
 })
 
 CasesTab:AddButton({
 	Name = "Open Rare Cases",
 	Callback = function(Value)
-	    while true 
-	        do
-	            opencase("Rare")
-	    end
+	    while wait(0.001) do
+    	        if breakCaseOpening then 
+    	            print("exiting loop")
+    	            breakCaseOpening = false
+    	            break 
+    	        end 
+	            spawn(function()
+    	                local a, b, c, d = opencaseremote:InvokeServer(
+                        _G.othershit,
+                        _G.passcode,
+                        "Rare",
+                        true
+                    )
+                    
+	            end)
+				if continousSelling then
+					sellremote:FireServer(
+						_G.othershit,
+						_G.passcode,
+						"All"
+					)
+				end
+    	    end
 	end
 })
 
 CasesTab:AddButton({
 	Name = "Open Epic Cases",
 	Callback = function(Value)
-	    while wait(0.5) do
-	            spawn(opencase("Epic"))
-    	end
+	    while wait(0.001) do
+    	        if breakCaseOpening then 
+    	            print("exiting loop")
+    	            breakCaseOpening = false
+    	            break 
+    	        end 
+	            spawn(function()
+    	                local a, b, c, d = opencaseremote:InvokeServer(
+                        _G.othershit,
+                        _G.passcode,
+                        "Epic",
+                        true
+                    )
+                    
+	            end)
+				if continousSelling then
+					sellremote:FireServer(
+						_G.othershit,
+						_G.passcode,
+						"All"
+					)
+				end
+    	    end
 	end
 })
 
