@@ -247,6 +247,13 @@ function teleportToBackyard()
     Character:SetPrimaryPartCFrame(targetPosition)
 end
 
+function teleportToMine()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(21.563797, 59.5332756, -12067.0078, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
 function teleportToDemostand()
     local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
     local HumRoot = Character:WaitForChild("HumanoidRootPart")
@@ -275,6 +282,14 @@ function teleportToSideWallTop()
     Character:SetPrimaryPartCFrame(targetPosition)
 end
 
+function teleportToSideWallTop()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(22.1230278, 62.4822121, -12084.5264, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
+
 teleportTab:AddButton({
 	Name = "Teleport to Premium Hangout",
 	Callback = function(Value)
@@ -286,6 +301,14 @@ teleportTab:AddButton({
 	Name = "Teleport to Backyard",
 	Callback = function(Value)
 	    teleportToBackyard()
+	end
+})
+
+
+teleportTab:AddButton({
+	Name = "Teleport to Mine",
+	Callback = function(Value)
+	    teleportToMine()
 	end
 })
 
