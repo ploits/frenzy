@@ -2,7 +2,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "Clicker Frenzy by Ammu", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 
-local remotesfolder = game.ReplicatedStorage["Game Objects"].Remotes
+local remotesfolder = game.ReplicatedStorage["GameObjects"].Remotes
 local opencaseremote = remotesfolder["Open Case"] -- remotefunction
 local sellremote = remotesfolder["Sell"]
 
@@ -127,6 +127,12 @@ local MovementTab = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
+local funTab = Window:MakeTab({
+	Name = "Fun",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 	
 local teleportTab = Window:MakeTab({
 	Name = "Teleport",
@@ -144,7 +150,7 @@ function getPlayerNames()
 end
 
 function openCases (type) 
-    while wait(0.001) do
+    while wait(0.00001) do
     	        if breakCaseOpening then 
     	            breakCaseOpening = false
     	            break 
@@ -168,6 +174,25 @@ function openCases (type)
     	    end    
 end
 
+
+funTab:AddButton({
+	Name = "Try to deep fry the server",
+	Callback = function(Value)
+	    while wait(0.000001) do
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("Common"))
+	        spawn(openCases("Rare"))
+	        spawn(openCases("Uncommon"))
+	    end
+	end
+})
+funTab:AddButton({
+	Name = "Try saving server",
+	Callback = function(Value)
+	    breakCaseOpening = true
+	end
+})
 
 function teleportToPlayer(name)
     local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
@@ -208,6 +233,27 @@ teleportTab:AddButton({
 	end
 })
 
+function teleportToPremium()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(-38.7536583, 87.8580856, 110.934212, -0.772614777, 7.23647346e-08, 0.634875119, 9.0035293e-08, 1, -4.41368586e-09, -0.634875119, 5.37510907e-08, -0.772614777)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
+function teleportToBackyard()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(139.447098, 89.4583282, -100.479576, -0.299619615, -8.4323041e-08, 0.954058766, 1.17204193e-08, 1, 9.20642549e-08, -0.954058766, 3.8766224e-08, -0.299619615)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
+function teleportToDemostand()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(-39.1508636, 92.3937073, -93.9738998, -0.105550356, 3.59055257e-08, -0.994413972, 2.42274787e-08, 1, 3.35356383e-08, 0.994413972, -2.05524451e-08, -0.105550356)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
 function teleportToPillarTop()
     local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
     local HumRoot = Character:WaitForChild("HumanoidRootPart")
@@ -228,6 +274,27 @@ function teleportToSideWallTop()
     local targetPosition = CFrame.new(-9.89273167, 130.223404, 7.33558416, 0.998966396, 1.33034623e-08, -0.0454544351, -1.44995065e-08, 1, -2.59833399e-08, 0.0454544351, 2.66155507e-08, 0.998966396)
     Character:SetPrimaryPartCFrame(targetPosition)
 end
+
+teleportTab:AddButton({
+	Name = "Teleport to Premium Hangout",
+	Callback = function(Value)
+	    teleportToPremium()
+	end
+})
+
+teleportTab:AddButton({
+	Name = "Teleport to Backyard",
+	Callback = function(Value)
+	    teleportToBackyard()
+	end
+})
+
+teleportTab:AddButton({
+	Name = "Teleport to Demo Dominus",
+	Callback = function(Value)
+	    teleportToDemostand()
+	end
+})
 
 teleportTab:AddButton({
 	Name = "Teleport to Pillar top",
@@ -408,6 +475,35 @@ CasesTab:AddButton({
 	end
 })
 
+CasesTab:AddButton({
+	Name = "Open Legendary Cases",
+	Callback = function(Value)
+	    while wait(0.001) do
+    	        if breakCaseOpening then 
+    	            print("exiting loop")
+    	            breakCaseOpening = false
+    	            break 
+    	        end 
+	            spawn(function()
+    	                local a, b, c, d = opencaseremote:InvokeServer(
+                        _G.othershit,
+                        _G.passcode,
+                        "Legendary",
+                        true
+                    )
+                    
+	            end)
+				if continousSelling then
+					sellremote:FireServer(
+						_G.othershit,
+						_G.passcode,
+						"All"
+					)
+				end
+    	    end
+	end
+})
+
 uiTab:AddButton({
 	Name = "Open 1B Area",
 	Callback = function(Value)
@@ -422,6 +518,12 @@ uiTab:AddButton({
         workspace.GamePassDoor:Destroy();
 	end
 })
+
+
+function getDoors() 
+	local doors = workspace.Doors:GetChildren()
+
+end
 
 
 
