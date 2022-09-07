@@ -5,6 +5,8 @@ local Window = OrionLib:MakeWindow({Name = "Clicker Frenzy by Ammu", HidePremium
 local remotesfolder = game.ReplicatedStorage["GameObjects"].Remotes
 local opencaseremote = remotesfolder["Open Case"] -- remotefunction
 local sellremote = remotesfolder["Sell"]
+local manageOutfit = remotesfolder["ManageOutfit"]
+
 
 
 local s = game.Players.LocalPlayer.PlayerGui["Game GUI"]["Client Controller"]
@@ -176,9 +178,35 @@ end
 
 
 funTab:AddButton({
-	Name = "Try to deep fry the server",
+	Name = "Try to deep fry the server - Cases",
 	Callback = function(Value)
 	    while wait(0.000001) do
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
+	        spawn(openCases("God"))
+	        spawn(openCases("Epic"))
 	        spawn(openCases("God"))
 	        spawn(openCases("Epic"))
 	        spawn(openCases("Common"))
@@ -187,6 +215,51 @@ funTab:AddButton({
 	    end
 	end
 })
+
+funTab:AddButton({
+	Name = "Try to deep fry the server - Outfits",
+	Callback = function(Value)
+	    while wait(0.0001) do
+
+            spawn(
+                function()
+                    manageOutfit:FireServer(
+                    "load",
+                    1
+                )
+                end)
+            spawn(
+                function()
+                    manageOutfit:FireServer(
+                    "load",
+                    2
+                )
+                end)
+            spawn(
+                function()
+                    manageOutfit:FireServer(
+                    "load",
+                    3
+                )
+                end)
+            spawn(
+                function()
+                    manageOutfit:FireServer(
+                    "load",
+                    4
+                )
+                end)
+            spawn(
+                function()
+                    manageOutfit:FireServer(
+                    "load",
+                    5
+                )
+            end)
+        end
+	end
+})
+
 funTab:AddButton({
 	Name = "Try saving server",
 	Callback = function(Value)
@@ -247,6 +320,13 @@ function teleportToBackyard()
     Character:SetPrimaryPartCFrame(targetPosition)
 end
 
+function teleportToMineHidden()
+    local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    local HumRoot = Character:WaitForChild("HumanoidRootPart")
+    local targetPosition = CFrame.new(-42.7970848, 60.5332642, -12050.8789, -0.716333687, -2.34005082e-09, 0.6977579, 2.0389633e-10, 1, 3.56299612e-09, -0.6977579, 2.69456435e-09, -0.716333687)
+    Character:SetPrimaryPartCFrame(targetPosition)
+end
+
 function teleportToMine()
     local Character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
     local HumRoot = Character:WaitForChild("HumanoidRootPart")
@@ -304,6 +384,13 @@ teleportTab:AddButton({
 	end
 })
 
+
+teleportTab:AddButton({
+	Name = "Teleport to Mine Hidden",
+	Callback = function(Value)
+	    teleportToMineHidden()
+	end
+})
 
 teleportTab:AddButton({
 	Name = "Teleport to Mine",
